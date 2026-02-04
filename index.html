@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Valentine for Roselle Joy 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+* { box-sizing: border-box; user-select: none; }
+body { margin:0; height:100vh; width:100vw; font-family:'Poppins',sans-serif; background:linear-gradient(135deg,#ff758c,#ff7eb3); display:flex; justify-content:center; align-items:center; overflow:hidden; text-align:center; position:relative; }
+.bg-float { position:absolute; font-size:26px; opacity:0.3; animation: floatUp 14s linear infinite; }
+@keyframes floatUp { from {transform: translateY(110vh);} to {transform: translateY(-15vh);} }
+.card { background: rgba(255,255,255,0.96); padding:30px; border-radius:28px; width:90%; max-width:400px; box-shadow:0 20px 40px rgba(0,0,0,0.3); position:relative; z-index:10; }
+h1 { font-family:'Great Vibes', cursive; font-size:42px; color:#ff4d6d; margin-bottom:5px; text-shadow:0 2px 8px rgba(255,77,109,0.4); }
+h2 { font-size:20px; margin-bottom:25px; }
+button { padding:16px; font-size:18px; border:none; border-radius:14px; cursor:pointer; width:100%; margin:10px 0; }
+.yes { background-color:#ff4d6d; color:white; font-weight:bold; box-shadow:0 8px 20px rgba(255,77,109,0.4); }
+.no { background-color:#f1f1f1; position:absolute; left:50%; transform:translateX(-50%); }
+.celebrate { display:none; }
+.hearts { font-size:45px; animation:float 1s infinite alternate; margin-top:15px; }
+@keyframes float { from {transform:translateY(0);} to {transform:translateY(-12px);} }
+</style>
+</head>
+<body>
+<div class="bg-float" style="left:10%; animation-delay:0s;">💖</div>
+<div class="bg-float" style="left:22%; animation-delay:3s;">🌹</div>
+<div class="bg-float" style="left:38%; animation-delay:1s;">💕</div>
+<div class="bg-float" style="left:52%; animation-delay:4s;">🌹</div>
+<div class="bg-float" style="left:66%; animation-delay:2s;">💘</div>
+<div class="bg-float" style="left:80%; animation-delay:5s;">🌹</div>
+<div class="bg-float" style="left:92%; animation-delay:1s;">💓</div>
+<div class="card" id="question">
+<h1>Roselle Joy</h1>
+<h2>Can I be your Valentine?</h2>
+<button class="yes" onclick="yesClicked()">YES 💘</button>
+<button class="no" id="noBtn">NO 😅</button>
+</div>
+<div class="card celebrate" id="celebration">
+<h1>Roselle Joy 💖</h1>
+<p>You just made my heart so happy 💕</p>
+<div class="hearts">💖 🌹 💕 🌹 💘</div>
+</div>
+<audio id="bgMusic" loop>
+<source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+</audio>
+<audio id="cheerSound">
+<source src="https://www.soundjay.com/human/cheering-01.mp3" type="audio/mpeg">
+</audio>
+<script>
+const noBtn = document.getElementById("noBtn");
+const bgMusic = document.getElementById("bgMusic");
+const noMessages = [
+"Please 😢",
+"Are you sure? 🤔",
+"Nice try 😏",
+"Don’t break my heart 💔",
+"Think again 😌",
+"I’ll wait forever 😭",
+"Still no? 🥺",
+"Give me a chance 💕",
+"Almost yes 😆",
+"You can’t escape love 💘"
+];
+let msgIndex = 0;
+function moveNoButton() {
+const x = Math.random() * (window.innerWidth - 140);
+const y = Math.random() * (window.innerHeight - 80);
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
+}
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("click", () => {
+moveNoButton();
+noBtn.innerText = noMessages[msgIndex];
+msgIndex = (msgIndex + 1) % noMessages.length;
+bgMusic.play();
+});
+function yesClicked() {
+document.getElementById("question").style.display = "none";
+document.getElementById("celebration").style.display = "block";
+document.getElementById("cheerSound").play();
+bgMusic.play();
+confetti({particleCount:350, spread:160, origin:{y:0.6}});
+}
+</script>
+</body>
+</html>
